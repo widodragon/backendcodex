@@ -1,40 +1,31 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('Regional_users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
+      datel: {
+        type: Sequelize.STRING
+      },
+      id_detail: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Regional_details',
+          key: 'id'
+        },
+      },
+      feeder: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      email: {
-        allowNull: false,
-        isEmail: true, 
+      distribusi: {
         type: Sequelize.STRING
       },
-      name: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      area: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      identity_number: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      mobile: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      password: {
-        allowNull: false,
+      odp: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -45,9 +36,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+    }).then(() => queryInterface.addConstraint('Regional_users', ['feeder'],{
+      type: 'unique',
+      name: 'custom_unique_constraint_name'
+    }))
+    .then(() => {
+        // perform further operations if needed
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('Regional_users');
   }
 };

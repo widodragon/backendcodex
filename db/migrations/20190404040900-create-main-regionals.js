@@ -1,39 +1,38 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('Main_regionals', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
+      name:{
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING        
       },
-      email: {
-        allowNull: false,
-        isEmail: true, 
-        type: Sequelize.STRING
-      },
-      name: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      area: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      identity_number: {
-        allowNull: false,
+      idle: {
+        defaultValue:0,
         type: Sequelize.INTEGER
       },
-      mobile: {
+      used: {
+        defaultValue:0,
+        type: Sequelize.INTEGER
+      },
+      broken: {
+        defaultValue:0,
+        type: Sequelize.INTEGER
+      },
+      total: {
+        defaultValue:0,
+        type: Sequelize.INTEGER
+      },
+      latitude: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      password: {
+      longitude: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -48,6 +47,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('Regionals');
   }
 };

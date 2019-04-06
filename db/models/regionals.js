@@ -1,6 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Regionals = sequelize.define('Regionals', {
+  const Regionals = sequelize.define('Main_regional', {
+    name: DataTypes.STRING,
     idle: DataTypes.INTEGER,
     used: DataTypes.INTEGER,
     broken: DataTypes.INTEGER,
@@ -9,7 +10,11 @@ module.exports = (sequelize, DataTypes) => {
     longitude: DataTypes.STRING
   }, {});
   Regionals.associate = function(models) {
-    // associations can be defined here
+    Regionals.hasMany(models.Regional,{
+      as:'regional',
+      foreignKey:'regionals_id',
+      onDelete: 'CASCADE'
+    });
   };
   return Regionals;
 };

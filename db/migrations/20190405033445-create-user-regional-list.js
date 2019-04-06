@@ -1,29 +1,35 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Regionals', {
+    return queryInterface.createTable('User_regional_lists', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      idle: {
-        type: Sequelize.INTEGER
-      },
-      used: {
-        type: Sequelize.INTEGER
-      },
-      broken: {
-        type: Sequelize.INTEGER
-      },
-      total: {
-        type: Sequelize.INTEGER
-      },
-      latitude: {
+      name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      longitude: {
+      id_regional_user: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Regional_users',
+          key: 'id'
+        },
+      },
+      post: {
+        defaultValue:0,
+        type: Sequelize.INTEGER
+      },
+      inet: {
+        defaultValue:0,
+        type: Sequelize.INTEGER
+      },
+      service: {
+        defaultValue:"Indihome",
         type: Sequelize.STRING
       },
       createdAt: {
@@ -37,6 +43,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Regionals');
+    return queryInterface.dropTable('User_regional_lists');
   }
 };
